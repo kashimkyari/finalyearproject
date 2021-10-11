@@ -1,3 +1,5 @@
+import 'package:MDXApp/models/classroom.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
@@ -56,12 +58,6 @@ class _InstructorClassroomsScreenState
             onPressed: () {
               Navigator.of(context).pushNamed(CreateClassroomScreen.routeName);
             },
-          ),
-          IconButton(
-            icon: Icon(
-              Icons.more_vert,
-            ),
-            onPressed: () {},
           ),
         ],
       ),
@@ -153,12 +149,26 @@ class _InstructorClassroomsScreenState
                                       Positioned(
                                         top: 10.0,
                                         right: 0.0,
-                                        child: IconButton(
-                                          icon: Icon(
-                                            Icons.more_vert,
-                                            color: Colors.white,
-                                          ),
-                                          onPressed: () {},
+                                        child: PopupMenuButton(
+                                          color: Colors.white,
+                                          itemBuilder: (context) {
+                                            var list =
+                                                List<PopupMenuEntry<Object>>();
+                                            list.add(
+                                              PopupMenuItem(
+                                                child: Text("Delete"),
+                                                value: 'delete',
+                                              ),
+                                            );
+                                            list.add(
+                                              PopupMenuItem(
+                                                child: Text("Cancel"),
+                                                value: 'cancel',
+                                              ),
+                                            );
+                                            return list;
+                                          },
+                                          onSelected: deleteClass,
                                         ),
                                       ),
                                     ],
@@ -183,5 +193,19 @@ class _InstructorClassroomsScreenState
         },
       ),
     );
+  }
+
+  void actionPopUpItemSelected(String value) {
+    if (value == 'delete') {
+      print("something got deleted");
+    } else if (value == 'cancel') {
+      Navigator.pop(context);
+    } else {}
+  }
+
+  // ignore: non_constant_identifier_names
+  deleteClass(data) {
+    Firestore.instance.collection("classrooms").document().delete().then(
+        (value) => Firestore.instance.collection("instructors").document());
   }
 }
