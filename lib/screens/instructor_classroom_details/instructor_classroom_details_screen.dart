@@ -7,8 +7,6 @@ import '../../screens/instructor_classroom_details/instructor_body.dart';
 import '../../models/instructor_classroom.dart';
 import '../../models/instructor_student.dart';
 
-import '../../utils/excel/create_excel.dart';
-
 class InstructorClassroomDetailsScreen extends StatelessWidget {
   static String routName = '/InstructorClassroomDetails';
 
@@ -44,7 +42,10 @@ class InstructorClassroomDetailsScreen extends StatelessWidget {
                 '${classroom.name}',
               ),
             ),
-            body: InstructorBody(classroom: classroom, initialStudentsSnapshot: initialStudentsSnapshot,),
+            body: InstructorBody(
+              classroom: classroom,
+              initialStudentsSnapshot: initialStudentsSnapshot,
+            ),
           );
         } else {
           return Scaffold(

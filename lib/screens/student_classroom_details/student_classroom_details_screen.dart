@@ -12,6 +12,8 @@ import '../../components/custom_dialog.dart';
 
 import './attendance_table.dart';
 import './student_painter.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:geocoding/geocoding.dart';
 
 class StudentClassroomDetailsScreen extends StatefulWidget {
   static const String routName = '/studentClassroomDetails';
@@ -34,6 +36,13 @@ class _StudentClassroomDetailsScreenState
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   String attendanceCode;
+  String longCode;
+  String latCode;
+  TextEditingController locationController = new TextEditingController();
+  var lat = 0.0;
+  var long = 0.0;
+
+  bool locPressed = false;
 
   @override
   Widget build(BuildContext context) {
@@ -119,9 +128,9 @@ class _StudentClassroomDetailsScreenState
                         mainAxisSize: MainAxisSize.min,
                         children: <Widget>[
                           Container(
-                            height: 180.0,
-                            width: 180.0,
-                            margin: EdgeInsets.only(top: 20.0),
+                            height: 90.0,
+                            width: 90.0,
+                            margin: EdgeInsets.only(top: 80.0),
                             child: Builder(
                               builder: (ctx) => RaisedButton(
                                 onPressed: enableAttend
@@ -135,17 +144,22 @@ class _StudentClassroomDetailsScreenState
                                                     context,
                                                     listen: false)
                                                 .attend(
-                                              classroomCode: classroom.id,
-                                              attendanceCode: attendanceCode,
-                                            );
+                                                    classroomCode: classroom.id,
+                                                    attendanceCode:
+                                                        attendanceCode,
+                                                    latCode: lat,
+                                                    longCode: long
+                                                    // latCode: lat
+                                                    );
 
                                             classroom.lastDateAttended = now;
                                             setState(() {});
 
                                             Scaffold.of(ctx).showSnackBar(
                                               SnackBar(
-                                                content:
-                                                    Text("Attended today 🍇"),
+                                                content: Text(
+                                                  "Attended today 🍇",
+                                                ),
                                               ),
                                             );
                                           } catch (error) {
@@ -159,7 +173,7 @@ class _StudentClassroomDetailsScreenState
                                   'Mark Present',
                                   style: TextStyle(
                                     color: Colors.white,
-                                    fontSize: 20,
+                                    fontSize: 16,
                                   ),
                                 ),
                                 shape: RoundedRectangleBorder(
@@ -173,31 +187,72 @@ class _StudentClassroomDetailsScreenState
                             height: 10,
                           ),
                           Container(
-                            height: 40,
-                            width: 250,
                             margin: EdgeInsets.only(bottom: 10),
                             child: Form(
-                              key: _formKey,
-                              child: TextFormField(
-                                enabled: enableAttend,
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: Color.fromRGBO(163, 160, 185, 1),
-                                ),
-                                decoration: inputDecoration.copyWith(
-                                    hintText: "Enter Attendance code"),
-                                keyboardType: TextInputType.number,
-                                validator: (code) {
-                                  if (code == "") return "code is required";
-                                  return code.length <= 3
-                                      ? "code >= 4 characters"
-                                      : null;
-                                },
-                                onSaved: (code) {
-                                  attendanceCode = code;
-                                },
-                              ),
-                            ),
+                                key: _formKey,
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      padding: EdgeInsets.fromLTRB(
+                                          95.0, 0.0, 95.0, 0.0),
+                                      child: TextFormField(
+                                        enabled: enableAttend,
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          color:
+                                              Color.fromRGBO(163, 160, 185, 1),
+                                        ),
+                                        decoration: inputDecoration.copyWith(
+                                            hintText: "Enter Attendance code"),
+                                        keyboardType: TextInputType.number,
+                                        validator: (code) {
+                                          if (code == "")
+                                            return "code is required";
+                                          return code.length <= 3
+                                              ? "code >= 4 characters"
+                                              : null;
+                                        },
+                                        onSaved: (code) {
+                                          attendanceCode = code;
+                                        },
+                                      ),
+                                    ),
+                                    Container(
+                                      padding: EdgeInsets.fromLTRB(
+                                          50.0, 10.0, 50.0, 0.0),
+                                      child: Column(children: <Widget>[
+                                        InkWell(
+                                            onTap: () {
+                                              setState(() {
+                                                locPressed = true;
+                                              });
+                                              FocusScope.of(context)
+                                                  .requestFocus(
+                                                      new FocusNode());
+                                              getUserLocation();
+                                            },
+                                            child: TextFormField(
+                                                textAlign: TextAlign.center,
+                                                enabled: false,
+                                                controller: locationController,
+                                                maxLines: 3,
+                                                decoration:
+                                                    inputDecoration.copyWith(
+                                                  hintText: locPressed
+                                                      ? "Locating.."
+                                                      : "Click icon to get Location",
+                                                  border: InputBorder.none,
+                                                  suffixIcon: IconButton(
+                                                    icon: Icon(
+                                                      Icons.my_location,
+                                                      color: Colors.red,
+                                                    ),
+                                                  ),
+                                                )))
+                                      ]),
+                                    ),
+                                  ],
+                                )),
                           ),
                         ],
                       ),
@@ -216,6 +271,21 @@ class _StudentClassroomDetailsScreenState
         }
       },
     );
+  }
+
+  getUserLocation() async {
+    Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
+    setState(() {
+      lat = position.latitude;
+      long = position.longitude;
+    });
+    List<Placemark> placemarks = await GeocodingPlatform.instance
+        .placemarkFromCoordinates(position.latitude, position.longitude);
+    Placemark placemark = placemarks[0];
+    String completeAddress =
+        ' ${placemark.administrativeArea}, ${placemark.thoroughfare}, ${placemark.country}';
+    locationController.text = completeAddress;
   }
 }
 

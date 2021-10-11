@@ -8,6 +8,8 @@ import './date.dart';
 class StudentClassroom extends Classroom {
   String _instructorName;
   String _instructorEmail;
+  String _lat;
+  String _long;
   Date _lastDateAttended;
   List<String> _sessions;
 
@@ -21,6 +23,18 @@ class StudentClassroom extends Classroom {
 
   set instructorEmail(String instructorEmail) {
     this._instructorEmail = instructorEmail;
+  }
+
+  String get lat => this._lat;
+
+  set lat(String lat) {
+    this._lat = lat;
+  }
+
+  String get long => this._long;
+
+  set long(String long) {
+    this._long = long;
   }
 
   Date get lastDateAttended => this._lastDateAttended;
@@ -44,6 +58,8 @@ class StudentClassroom extends Classroom {
     @required String endTime,
     @required String instructorName,
     @required String instructorEmail,
+    @required String lat,
+    @required String long,
     @required Date lastDateAttended,
     List<String> sessions,
   }) : super(
@@ -55,6 +71,8 @@ class StudentClassroom extends Classroom {
             endTime: endTime) {
     this._instructorName = instructorName;
     this._instructorEmail = instructorEmail;
+    this._lat = lat;
+    this._long = long;
     this._lastDateAttended = lastDateAttended;
     this._sessions = sessions;
   }
@@ -75,8 +93,10 @@ class StudentClassroom extends Classroom {
       endTime: classroom['endTime'] ?? "00:00",
       instructorName: classroom['instructorName'] ?? "",
       instructorEmail: classroom['instructorEmail'] ?? "",
+      lat: classroom['lat'] ?? "",
+      long: classroom['long'] ?? "",
       lastDateAttended:
-          classroom['lastDateAttended'] ?? Date(day: 4, month: 1, year: 2000),
+          classroom['lastDateAttended'] ?? Date(day: 4, month: 10, year: 2021),
       sessions: (classroom['sessions'] == null
               ? []
               : classroom['sessions'] as List<dynamic>)

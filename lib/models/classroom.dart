@@ -9,6 +9,8 @@ class Classroom {
   int _weekDay;
   String _startTime;
   String _endTime;
+  String _long;
+  String _lat;
 
   String get id => this._id;
   String get name => this._name;
@@ -16,6 +18,8 @@ class Classroom {
   int get weekDay => this._weekDay;
   String get startTime => this._startTime;
   String get endTime => this._endTime;
+  String get lat => this._lat;
+  String get long => this._long;
 
   set id(String id) {
     this._id = id;
@@ -45,19 +49,30 @@ class Classroom {
     this._endTime = endTime;
   }
 
-  Classroom({
-    @required String id,
-    @required String name,
-    @required Date createdAt,
-    @required int weekDay,
-    @required String startTime,
-    @required String endTime,
-  }) {
+  set lat(String lat) {
+    this._lat = lat;
+  }
+
+  set long(String long) {
+    this._long = long;
+  }
+
+  Classroom(
+      {@required String id,
+      @required String name,
+      @required Date createdAt,
+      @required int weekDay,
+      @required String startTime,
+      @required String endTime,
+      @required String lat,
+      @required String long}) {
     this._id = id;
     this._name = name;
     this._createdAt = createdAt;
     this._weekDay = weekDay;
     this._startTime = startTime;
     this._endTime = endTime;
+    this._lat = lat;
+    this._long = long;
   }
 }

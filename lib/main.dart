@@ -1,3 +1,4 @@
+import 'package:MDXApp/screens/instructor_classroom_details/instructor_map.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -89,6 +90,7 @@ class MyApp extends StatelessWidget {
               routes: {
                 CreateClassroomScreen.routeName: (_) => CreateClassroomScreen(),
                 JoinClassroomScreen.routeName: (_) => JoinClassroomScreen(),
+                location.routName: (_) => location(),
               },
               // ignore: missing_return
               onGenerateRoute: (settings) {

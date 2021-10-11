@@ -138,7 +138,10 @@ class StudentClassrooms extends Student with ChangeNotifier {
   }
 
   Future<void> attend(
-      {@required String classroomCode, @required String attendanceCode}) async {
+      {@required String classroomCode,
+      @required String attendanceCode,
+      double latCode,
+      double longCode}) async {
     DateTime now = DateTime.now();
 
     final attendanceConstraint = await _firestore
@@ -180,6 +183,8 @@ class StudentClassrooms extends Student with ChangeNotifier {
         .updateData(
       {
         'lastDateAttended': Date.fromDateTime(now).toMap(),
+        'lat': latCode,
+        'long': longCode,
         'sessions': FieldValue.arrayUnion([Date.fromDateTime(now).toString()])
       },
     );

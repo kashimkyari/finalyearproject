@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:MDXApp/screens/instructor_classroom_details/instructor_map.dart';
 import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
@@ -11,8 +12,6 @@ import '../providers/instructor_classrooms.dart';
 import '../providers/student_classrooms.dart';
 
 import '../components/custom_dialog.dart';
-
-import '../utils/excel/create_excel.dart';
 
 class GeneralAppDrawer extends StatelessWidget {
   const GeneralAppDrawer({
@@ -89,9 +88,10 @@ class GeneralAppDrawer extends StatelessWidget {
               },
             ),
             ListTile(
-              leading: Icon(Icons.class_, color: Colors.white),
+              leading:
+                  Icon(Icons.question_answer_outlined, color: Colors.white),
               title: Text(
-                "Classes",
+                "Privacy Policy",
                 style: TextStyle(color: Colors.white),
               ),
               onTap: () {
@@ -99,8 +99,16 @@ class GeneralAppDrawer extends StatelessWidget {
               },
             ),
             if (userType == "instructor")
-              ////    Where Excel sheets get exported   ////
-              ExportExcel(),
+              ListTile(
+                leading: Icon(Icons.map_outlined, color: Colors.white),
+                title: Text(
+                  "Location",
+                  style: TextStyle(color: Colors.white),
+                ),
+                onTap: () {
+                  Navigator.of(context).pushNamed(location.routName);
+                },
+              ),
             ListTile(
               leading: Icon(Icons.info, color: Colors.white),
               title: Text(
@@ -165,25 +173,6 @@ class _ExportExcelState extends State<ExportExcel> {
         });
 
         String path;
-
-        try {
-          path = await exportClassroomsToExcel(
-              Provider.of<Auth>(context, listen: false).userId);
-
-          Navigator.pop(context);
-
-          showDialog(
-            context: context,
-            builder: (ctx) => CustomDialog(
-              title: "Excel saved to:",
-              description: path,
-              positiveButtonText: "Okay",
-              negativeButtonText: null,
-            ),
-          );
-        } catch (error) {
-          showErrorDialog(context, error.toString());
-        }
 
         setState(() {
           this.exporting = false;

@@ -8,6 +8,8 @@ class Student extends Person {
   String _id;
   String _email;
   String _collegeId;
+  String _lat;
+  String _long;
   List<Stream<StudentClassroom>> _classrooms = [];
 
   String get id => this._id;
@@ -28,6 +30,18 @@ class Student extends Person {
     this._collegeId = collegeId;
   }
 
+  String get lat => this._lat;
+
+  set lat(String lat) {
+    this._lat = lat;
+  }
+
+  String get long => this._long;
+
+  set long(String long) {
+    this._long = long;
+  }
+
   List<Stream<StudentClassroom>> get classrooms => this._classrooms;
 
   set classrooms(List<Stream<StudentClassroom>> classrooms) {
@@ -44,20 +58,21 @@ class Student extends Person {
           print(classroom);
 
           return StudentClassroom(
-            id: classroomDocument.documentID ?? "",
-            name: classroom['name'] ?? "",
-            createdAt: classroom['createdAt'] == null
-                ? Date.fromDateTime(DateTime.now())
-                : Date.fromMap(classroom['createdAt']),
-            weekDay: classroom['weekDay'] ?? 0,
-            startTime: classroom['startTime'] ?? "00:00",
-            endTime: classroom['endTime'] ?? "00:00",
-            instructorName: classroom['instructorName'] ?? "",
-            instructorEmail: classroom['instructorEmail'] ?? "",
-            lastDateAttended:
-                lastDateAttended ?? Date(day: 4, month: 1, year: 2000),
-            sessions: sessions ?? [],
-          );
+              id: classroomDocument.documentID ?? "",
+              name: classroom['name'] ?? "",
+              createdAt: classroom['createdAt'] == null
+                  ? Date.fromDateTime(DateTime.now())
+                  : Date.fromMap(classroom['createdAt']),
+              weekDay: classroom['weekDay'] ?? 0,
+              startTime: classroom['startTime'] ?? "00:00",
+              endTime: classroom['endTime'] ?? "00:00",
+              instructorName: classroom['instructorName'] ?? "",
+              instructorEmail: classroom['instructorEmail'] ?? "",
+              lastDateAttended:
+                  lastDateAttended ?? Date(day: 4, month: 1, year: 2000),
+              sessions: sessions ?? [],
+              lat: lat ?? "",
+              long: long ?? "");
         },
       ),
     );
