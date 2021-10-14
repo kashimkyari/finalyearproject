@@ -1,5 +1,10 @@
-import 'dart:async';
+// ignore_for_file: override_on_non_overriding_member
 
+import 'dart:async';
+import 'dart:convert';
+
+import 'package:MDXApp/models/instructor_classroom.dart';
+import 'package:MDXApp/providers/instructor_classrooms.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +12,9 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart';
 import 'package:MDXApp/models/classroom.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import '../instructor_classroom_details/instructor_classroom_details_screen.dart';
 
 class location extends StatefulWidget {
   static const String routName = "/location";
@@ -25,11 +33,20 @@ class _locationState extends State<location> {
   Position currentPosition;
   var geoLocator = Geolocator();
 
+  String _userId;
+  List<dynamic> _classroomsReferences;
+
   @override
   void initState() {
     locatePosition();
     getMarker();
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await Provider.of<InstructorClassrooms>(context, listen: false)
+          .getUserIdAndNameAndEmailAndClassroomsReferences();
+      Provider.of<InstructorClassrooms>(context, listen: false)
+          .fetchClassrooms();
+    });
   }
 
   void locatePosition() async {
@@ -66,9 +83,28 @@ class _locationState extends State<location> {
   // })
 
   getMarker() async {
+    var _classrooms =
+        Provider.of<InstructorClassrooms>(context, listen: false).classrooms;
+    print(_classrooms);
+    print("seee top");
+
+    final prefs = await SharedPreferences.getInstance();
+    final extractedUserData =
+        json.decode(prefs.getString('userData')) as Map<String, Object>;
+    _userId = extractedUserData['userId'];
+
+    DocumentSnapshot instructor = await Firestore.instance
+        .collection('instructors')
+        .document(_userId)
+        .get();
+    this._classroomsReferences = instructor['classrooms'];
+    ////////////////////////////////////////////////////////////////////////////
+    print(this._classroomsReferences);
+    print("from map");
+
     Firestore.instance
         .collection('classrooms')
-        .document('fFLzXVRVy6aOpK8sKpMZ')
+        .document(this._classroomsReferences[0])
         .collection('students')
         .getDocuments()
         .then((myData) {
@@ -96,6 +132,7 @@ class _locationState extends State<location> {
     return Scaffold(
         key: scaffoldKey,
         appBar: AppBar(
+          backgroundColor: Colors.red,
           title: Text(
             "Location",
             style: TextStyle(

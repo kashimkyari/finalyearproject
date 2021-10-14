@@ -69,9 +69,12 @@ class _CreateClassroomScreenState extends State<CreateClassroomScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xAA000000),
+        backgroundColor: Colors.red,
         elevation: 1.5,
-        title: Text('Create class'),
+        title: Text(
+          'Create class',
+          style: TextStyle(fontSize: 18),
+        ),
         leading: IconButton(
           icon: Icon(Icons.close),
           onPressed: () {

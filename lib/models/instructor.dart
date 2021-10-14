@@ -44,6 +44,8 @@ class Instructor extends Person {
                 ? Date.fromDateTime(DateTime.now())
                 : Date.fromMap(classroom['createdAt']),
             weekDay: classroom['weekDay'] ?? 0,
+            lat: classroom["lat"] ?? "",
+            long: classroom["long"] ?? "",
             startTime: classroom['startTime'] ?? "00:00",
             endTime: classroom['endTime'] ?? "00:00",
             students: students,

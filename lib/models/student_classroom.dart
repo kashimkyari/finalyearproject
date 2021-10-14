@@ -68,7 +68,9 @@ class StudentClassroom extends Classroom {
             createdAt: createdAt,
             weekDay: weekDay,
             startTime: startTime,
-            endTime: endTime) {
+            endTime: endTime,
+            lat: lat,
+            long: long) {
     this._instructorName = instructorName;
     this._instructorEmail = instructorEmail;
     this._lat = lat;

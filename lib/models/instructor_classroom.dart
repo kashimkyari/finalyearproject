@@ -20,6 +20,8 @@ class InstructorClassroom extends Classroom {
     @required int weekDay,
     @required String startTime,
     @required String endTime,
+    @required String lat,
+    @required String long,
     Stream<List<InstructorStudent>> students,
   }) : super(
             id: id,
@@ -27,7 +29,9 @@ class InstructorClassroom extends Classroom {
             createdAt: createdAt,
             weekDay: weekDay,
             startTime: startTime,
-            endTime: endTime) {
+            endTime: endTime,
+            lat: lat,
+            long: long) {
     this._students = students;
   }
 
@@ -42,6 +46,8 @@ class InstructorClassroom extends Classroom {
       weekDay: classroom['weekDay'] ?? 0,
       startTime: classroom['startTime'] ?? "00:00",
       endTime: classroom['endTime'] ?? "00:00",
+      lat: classroom["lat"] ?? "",
+      long: classroom["long"] ?? "",
       students: classroom['students'] == null
           ? {}.values
           : classroom['students'].values.map<InstructorStudent>((student) {

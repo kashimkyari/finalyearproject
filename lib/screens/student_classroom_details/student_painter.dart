@@ -3,17 +3,11 @@ import 'package:flutter/material.dart';
 class StudentPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-    double sh = size.height;
-    double sw = size.width;
+    double sh = 320;
+    double sw = 100;
     Paint paint = Paint();
 
     Path path = Path();
-
-    path.moveTo(0, sh);
-    path.lineTo(0, 0.9 * sh);
-    path.quadraticBezierTo(0.5 * sw, 0, sw, 0.9 * sh);
-    path.lineTo(sw, sh);
-    path.close();
 
     var rect = Offset.zero & size;
     paint.shader = LinearGradient(

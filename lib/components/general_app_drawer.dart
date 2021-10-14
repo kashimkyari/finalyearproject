@@ -11,8 +11,6 @@ import '../providers/auth.dart';
 import '../providers/instructor_classrooms.dart';
 import '../providers/student_classrooms.dart';
 
-import '../components/custom_dialog.dart';
-
 class GeneralAppDrawer extends StatelessWidget {
   const GeneralAppDrawer({
     Key key,

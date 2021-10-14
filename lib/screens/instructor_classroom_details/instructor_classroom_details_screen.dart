@@ -38,6 +38,7 @@ class InstructorClassroomDetailsScreen extends StatelessWidget {
               userType: "instructor",
             ),
             appBar: AppBar(
+              backgroundColor: Colors.red,
               title: Text(
                 '${classroom.name}',
               ),

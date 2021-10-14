@@ -96,18 +96,17 @@ class _InstructorBodyState extends State<InstructorBody> {
                                         style: TextStyle(color: Colors.white),
                                       ),
                                       backgroundColor:
-                                          Color.fromRGBO(126, 185, 255, 1),
+                                          Color.fromRGBO(206, 20, 94, 1.0),
                                     ),
                                     title: Text(
                                       students[index].name,
                                       style: TextStyle(
-                                        color: students[index]
-                                                .lastDateAttended
-                                                .sameDateTime(DateTime.now())
-                                            ? Colors.white
-                                            : Colors.grey,
-                                          fontWeight: FontWeight.w400
-                                      ),
+                                          color: students[index]
+                                                  .lastDateAttended
+                                                  .sameDateTime(DateTime.now())
+                                              ? Colors.white
+                                              : Colors.grey,
+                                          fontWeight: FontWeight.w400),
                                     ),
                                     trailing: Text(
                                       students[index].collegeId,
@@ -157,9 +156,7 @@ class _InstructorBodyState extends State<InstructorBody> {
                     children: <Widget>[
                       Container(
                         decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Color.fromRGBO(123, 112, 255, 1),
-                        ),
+                            shape: BoxShape.circle, color: Colors.grey),
                         child: IconButton(
                           iconSize: 33,
                           icon: Icon(
@@ -214,7 +211,7 @@ class _InstructorBodyState extends State<InstructorBody> {
                       Container(
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: Color.fromRGBO(123, 112, 255, 1),
+                          color: Color.fromRGBO(70, 231, 35, 1.0),
                         ),
                         child: IconButton(
                           iconSize: 33,
@@ -278,7 +275,7 @@ class _InstructorBodyState extends State<InstructorBody> {
                               child: CircularProgressIndicator(),
                             )
                           : FlatButton(
-                              color: Color.fromRGBO(100, 130, 255, 1),
+                              color: Colors.green,
                               child: Text(
                                 "UPDATE",
                                 style: TextStyle(

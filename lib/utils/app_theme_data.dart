@@ -4,7 +4,6 @@ final appThemeData = ThemeData(
   //***    Main Colors    ***//
   primaryColor: Color.fromRGBO(229, 40, 40, 1),
   primaryColorLight: const Color(0xE84848),
-  accentColor: Colors.redAccent,
   scaffoldBackgroundColor: const Color(0xFFFFFFFF),
   canvasColor: Color.fromRGBO(235, 66, 66, 0.6),
 

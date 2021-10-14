@@ -77,6 +77,7 @@ class _StudentClassroomDetailsScreenState
 
           Size size = MediaQuery.of(context).size;
           double sh = size.height;
+          // ignore: unused_local_variable
           double sw = size.width;
 
           return Scaffold(
@@ -84,9 +85,11 @@ class _StudentClassroomDetailsScreenState
               userType: "student",
             ),
             appBar: AppBar(
+              backgroundColor: Colors.red,
               elevation: 1.5,
               title: Text(
                 '${classroom.name}',
+                style: TextStyle(fontSize: 18),
               ),
               actions: <Widget>[
                 Center(
@@ -122,15 +125,14 @@ class _StudentClassroomDetailsScreenState
                   bottom: 0,
                   height: 0.50 * sh,
                   child: CustomPaint(
-                    painter: StudentPainter(),
                     child: Center(
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: <Widget>[
                           Container(
-                            height: 90.0,
-                            width: 90.0,
-                            margin: EdgeInsets.only(top: 80.0),
+                            height: 60.0,
+                            width: 200.0,
+                            margin: EdgeInsets.only(top: 100.0),
                             child: Builder(
                               builder: (ctx) => RaisedButton(
                                 onPressed: enableAttend
@@ -155,7 +157,8 @@ class _StudentClassroomDetailsScreenState
                                             classroom.lastDateAttended = now;
                                             setState(() {});
 
-                                            Scaffold.of(ctx).showSnackBar(
+                                            ScaffoldMessenger.of(ctx)
+                                                .showSnackBar(
                                               SnackBar(
                                                 content: Text(
                                                   "Attended today 🍇",
@@ -172,12 +175,12 @@ class _StudentClassroomDetailsScreenState
                                 child: Text(
                                   'Mark Present',
                                   style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 16,
-                                  ),
+                                      color: Colors.black,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold),
                                 ),
                                 shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(100.0),
+                                  borderRadius: BorderRadius.circular(15.0),
                                 ),
                                 color: Colors.red,
                               ),
@@ -284,7 +287,7 @@ class _StudentClassroomDetailsScreenState
         .placemarkFromCoordinates(position.latitude, position.longitude);
     Placemark placemark = placemarks[0];
     String completeAddress =
-        ' ${placemark.administrativeArea}, ${placemark.thoroughfare}, ${placemark.country}';
+        '  ${placemark.thoroughfare}, ${placemark.administrativeArea}, ${placemark.country}';
     locationController.text = completeAddress;
   }
 }
@@ -297,7 +300,7 @@ final inputDecoration = InputDecoration(
     right: 2.0,
   ),
   filled: true,
-  fillColor: Colors.white,
+  fillColor: Colors.black,
   enabledBorder: OutlineInputBorder(
     borderRadius: BorderRadius.circular(10.0),
     borderSide: BorderSide.none,

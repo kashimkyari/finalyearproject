@@ -1,3 +1,4 @@
+// ignore: unused_import
 import 'package:MDXApp/models/classroom.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -5,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/instructor_classrooms.dart';
+// ignore: unused_import
 import '../providers/auth.dart';
 
 import '../models/instructor_classroom.dart';
@@ -46,7 +48,8 @@ class _InstructorClassroomsScreenState
         userType: "instructor",
       ),
       appBar: AppBar(
-        elevation: 1.5,
+        backgroundColor: Colors.red,
+        elevation: 0.5,
         title: Text(
           'MDXApp - Instructor',
         ),

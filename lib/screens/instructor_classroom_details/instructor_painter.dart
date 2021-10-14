@@ -19,10 +19,7 @@ class InstructorPainter extends CustomPainter {
     paint.shader = LinearGradient(
       begin: Alignment.topLeft,
       end: Alignment.bottomRight,
-      colors: [
-        Color.fromRGBO(112, 252, 255, 1),
-        Color.fromRGBO(123, 112, 255, 1)
-      ],
+      colors: [Color.fromRGBO(216, 52, 52, 1), Color.fromRGBO(255, 16, 16, 1)],
     ).createShader(rect);
 
     canvas.drawPath(path, paint);

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/student_classrooms.dart';
+// ignore: unused_import
 import '../providers/auth.dart';
 
 import '../models/student_classroom.dart';
@@ -33,6 +34,7 @@ class _StudentClassroomsScreenState extends State<StudentClassroomsScreen> {
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
+    // ignore: unused_local_variable
     double sh = screenSize.height;
     double sw = screenSize.width;
 
@@ -41,9 +43,11 @@ class _StudentClassroomsScreenState extends State<StudentClassroomsScreen> {
         userType: "student",
       ),
       appBar: AppBar(
+        backgroundColor: Colors.red,
         elevation: 1.5,
         title: Text(
           'MDXApp - Student',
+          style: TextStyle(fontSize: 18),
         ),
         actions: <Widget>[
           IconButton(
@@ -70,7 +74,10 @@ class _StudentClassroomsScreenState extends State<StudentClassroomsScreen> {
               .classrooms);
           if (classroomsLoading) {
             return Center(
-              child: CircularProgressIndicator(),
+              child: CircularProgressIndicator(
+                color: Colors.red,
+                strokeWidth: 4.0,
+              ),
             );
           } else {
             List<Stream<StudentClassroom>> _classrooms =
@@ -154,8 +161,7 @@ class _StudentClassroomsScreenState extends State<StudentClassroomsScreen> {
                                 Positioned(
                                   top: 10.0,
                                   right: 0.0,
-                                  child: 
-                                   IconButton(
+                                  child: IconButton(
                                     icon: Icon(
                                       Icons.more_vert,
                                       color: Colors.white,
