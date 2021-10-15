@@ -130,8 +130,8 @@ class _StudentClassroomDetailsScreenState
                         mainAxisSize: MainAxisSize.min,
                         children: <Widget>[
                           Container(
-                            height: 60.0,
-                            width: 200.0,
+                            height: 50.0,
+                            width: 300.0,
                             margin: EdgeInsets.only(top: 100.0),
                             child: Builder(
                               builder: (ctx) => RaisedButton(
@@ -175,14 +175,15 @@ class _StudentClassroomDetailsScreenState
                                 child: Text(
                                   'Mark Present',
                                   style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold),
+                                    color: Colors.white,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(15.0),
                                 ),
-                                color: Colors.red,
+                                color: Colors.green,
                               ),
                             ),
                           ),
@@ -300,7 +301,7 @@ final inputDecoration = InputDecoration(
     right: 2.0,
   ),
   filled: true,
-  fillColor: Colors.black,
+  fillColor: Color.fromRGBO(190, 190, 190, 10),
   enabledBorder: OutlineInputBorder(
     borderRadius: BorderRadius.circular(10.0),
     borderSide: BorderSide.none,

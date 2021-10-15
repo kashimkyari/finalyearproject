@@ -52,6 +52,7 @@ class _InstructorClassroomsScreenState
         elevation: 0.5,
         title: Text(
           'MDXApp - Instructor',
+          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         ),
         actions: <Widget>[
           IconButton(

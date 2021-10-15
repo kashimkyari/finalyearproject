@@ -72,11 +72,11 @@ class _CreateClassroomScreenState extends State<CreateClassroomScreen> {
         backgroundColor: Colors.red,
         elevation: 1.5,
         title: Text(
-          'Create class',
+          'Create Class',
           style: TextStyle(fontSize: 18),
         ),
         leading: IconButton(
-          icon: Icon(Icons.close),
+          icon: Icon(Icons.chevron_left),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -141,13 +141,6 @@ class _CreateClassroomScreenState extends State<CreateClassroomScreen> {
                       'CREATE',
                     ),
                   ),
-          ),
-          IconButton(
-            icon: Icon(
-              Icons.more_vert,
-              color: Colors.white,
-            ),
-            onPressed: () {},
           ),
         ],
       ),

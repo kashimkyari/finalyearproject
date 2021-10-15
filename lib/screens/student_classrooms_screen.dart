@@ -58,12 +58,6 @@ class _StudentClassroomsScreenState extends State<StudentClassroomsScreen> {
               Navigator.of(context).pushNamed(JoinClassroomScreen.routeName);
             },
           ),
-          IconButton(
-            icon: Icon(
-              Icons.more_vert,
-            ),
-            onPressed: () {},
-          ),
         ],
       ),
       body: Selector<StudentClassrooms, bool>(

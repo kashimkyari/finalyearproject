@@ -36,7 +36,7 @@ class _JoinClassroomScreenState extends State<JoinClassroomScreen> {
           style: TextStyle(fontSize: 18),
         ),
         leading: IconButton(
-          icon: Icon(Icons.close),
+          icon: Icon(Icons.chevron_left),
           onPressed: () {
             Navigator.pop(context);
           },
